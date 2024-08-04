@@ -9,19 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{97CC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{ACA6F9F9-BAC5-418E-8B29-59F2F4637D32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Auth.Api", "Modules.Auth.Api\Modules.Auth.Api.csproj", "{E6EAD07A-B96E-4F7D-AD56-35873FBCEE4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Auth.Api", "Modules.Auth.Api\Modules.Auth.Api.csproj", "{E6EAD07A-B96E-4F7D-AD56-35873FBCEE4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Auth.Domain", "Modules.Auth.Domain\Modules.Auth.Domain.csproj", "{6AF5A31F-D3E7-4B0A-BFDD-DD9F938EAFB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Auth.Domain", "Modules.Auth.Domain\Modules.Auth.Domain.csproj", "{6AF5A31F-D3E7-4B0A-BFDD-DD9F938EAFB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Auth.Application", "Modules.Auth.Application\Modules.Auth.Application.csproj", "{F054A1C9-5FDE-4745-9652-E5CF00C939E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Auth.Application", "Modules.Auth.Application\Modules.Auth.Application.csproj", "{F054A1C9-5FDE-4745-9652-E5CF00C939E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Auth.Infrastructure", "Modules.Auth.Infrastructure\Modules.Auth.Infrastructure.csproj", "{B81E6642-7A84-40C2-B6FC-9A5153932D59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Auth.Infrastructure", "Modules.Auth.Infrastructure\Modules.Auth.Infrastructure.csproj", "{B81E6642-7A84-40C2-B6FC-9A5153932D59}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{106A801F-0151-48EA-BF85-63F5B87A2C66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Domain", "Shared.Domain\Shared.Domain.csproj", "{EA12C2CF-C821-44B2-951B-3E4A1293F6F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Domain", "Shared.Domain\Shared.Domain.csproj", "{EA12C2CF-C821-44B2-951B-3E4A1293F6F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.DTOs", "Shared.DTOs\Shared.DTOs.csproj", "{C9587C41-B2D9-4F33-AD6D-D0748FC57A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.DTOs", "Shared.DTOs\Shared.DTOs.csproj", "{C9587C41-B2D9-4F33-AD6D-D0748FC57A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shard.Infrastructure", "Shard.Infrastructure\Shard.Infrastructure.csproj", "{0D96DFED-D4A9-49F8-917C-9DC671C8AE81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{C9587C41-B2D9-4F33-AD6D-D0748FC57A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9587C41-B2D9-4F33-AD6D-D0748FC57A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9587C41-B2D9-4F33-AD6D-D0748FC57A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D96DFED-D4A9-49F8-917C-9DC671C8AE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D96DFED-D4A9-49F8-917C-9DC671C8AE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D96DFED-D4A9-49F8-917C-9DC671C8AE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D96DFED-D4A9-49F8-917C-9DC671C8AE81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{B81E6642-7A84-40C2-B6FC-9A5153932D59} = {ACA6F9F9-BAC5-418E-8B29-59F2F4637D32}
 		{EA12C2CF-C821-44B2-951B-3E4A1293F6F1} = {106A801F-0151-48EA-BF85-63F5B87A2C66}
 		{C9587C41-B2D9-4F33-AD6D-D0748FC57A24} = {106A801F-0151-48EA-BF85-63F5B87A2C66}
+		{0D96DFED-D4A9-49F8-917C-9DC671C8AE81} = {106A801F-0151-48EA-BF85-63F5B87A2C66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FFC88EF0-CC48-4E54-A7AC-CFD2F5C33B50}

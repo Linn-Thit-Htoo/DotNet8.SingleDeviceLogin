@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Application.Services;
+using Shared.Domain.Enums;
 
 namespace Modules.Auth.Application.Features.Auth.Register
 {
@@ -32,6 +33,12 @@ namespace Modules.Auth.Application.Features.Auth.Register
                 {
                     string errors = string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage));
                     responseModel = Result<RegisterResponseModel>.FailureResult(errors);
+                    goto result;
+                }
+
+                if (!Enum.IsDefined(typeof(EnumUserRole), request.RequestModel.UserRole))
+                {
+                    responseModel = Result<RegisterResponseModel>.FailureResult("Invalid User Role.");
                     goto result;
                 }
 

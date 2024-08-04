@@ -28,7 +28,7 @@ namespace Modules.Auth.Api.Extensions
 
         private static IServiceCollection AddAuthService(this IServiceCollection services)
         {
-            return services.AddScoped<IAuthService, IAuthService>();
+            return services.AddScoped<IAuthService, AuthService>();
         }
 
         private static IServiceCollection AddValidatorService(this IServiceCollection services)
