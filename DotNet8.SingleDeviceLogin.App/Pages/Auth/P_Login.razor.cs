@@ -15,7 +15,8 @@ namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
 			if (responseModel.IsSuccess)
 			{
 				await LocalStorage.SetItemAsStringAsync("token", responseModel.Token);
-			}
-		}
+                Navigation.NavigateTo("/users");
+            }
+        }
 	}
 }

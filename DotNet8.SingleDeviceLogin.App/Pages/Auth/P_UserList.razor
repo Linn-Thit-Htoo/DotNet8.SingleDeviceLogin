@@ -1,0 +1,26 @@
+﻿@page "/users"
+
+<MudSimpleTable Style="overflow-x: auto;">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>User Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ResponseModel?.Data?.DataLst?.Count > 0)
+        {
+            @foreach (var item in ResponseModel.Data.DataLst)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@item.UserRole</td>
+                </tr>
+            }
+        }
+    </tbody>
+</MudSimpleTable>
