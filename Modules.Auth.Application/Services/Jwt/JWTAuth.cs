@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Modules.Auth.Application.Services
+namespace Modules.Auth.Application.Services.Jwt
 {
     public class JWTAuth
     {

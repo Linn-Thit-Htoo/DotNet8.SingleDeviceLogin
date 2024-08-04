@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Modules.Auth.Domain.Interfaces;
-using Modules.Auth.Application.Services;
 using Shared.Domain.Enums;
+using Modules.Auth.Application.Services.ValidatorServices;
 
 namespace Modules.Auth.Application.Features.Auth.Register
 {

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Modules.Auth.Application.Services;
+using Modules.Auth.Application.Services.ValidatorServices;
 using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
+using Shard.Infrastructure;
 using System.Text;
 
 namespace Modules.Auth.Api.Extensions
@@ -16,7 +18,8 @@ namespace Modules.Auth.Api.Extensions
             return services.AddDbContextService(builder)
                 .AddAuthService()
                 .AddValidatorService()
-                .AddAuthenticationService(builder);
+                .AddAuthenticationService(builder)
+                .AddAesService();
         }
 
         private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
@@ -64,6 +67,11 @@ namespace Modules.Auth.Api.Extensions
                 });
 
             return services;
+        }
+
+        private static IServiceCollection AddAesService(this IServiceCollection services)
+        {
+            return services.AddScoped<AesService>();
         }
     }
 }
