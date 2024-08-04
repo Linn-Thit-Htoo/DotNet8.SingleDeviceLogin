@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Modules.Auth.Application.Features.Auth.Login;
 using Modules.Auth.Application.Features.Auth.Register;
 using Modules.Auth.Domain.Interfaces;
 using Shared.DTOs.Features.Auth;
@@ -25,6 +26,15 @@ namespace Modules.Auth.Api.Controllers
         {
             var command = new RegisterCommand(requestModel);
             var result = await _mediator.Send(command);
+
+            return Content(result);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestModel requestModel)
+        {
+            var query = new LoginQuery(requestModel);
+            var result = await _mediator.Send(query);
 
             return Content(result);
         }

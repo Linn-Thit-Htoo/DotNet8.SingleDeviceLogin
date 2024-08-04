@@ -33,7 +33,7 @@ namespace Modules.Auth.Api.Extensions
 
         private static IServiceCollection AddValidatorService(this IServiceCollection services)
         {
-            return services.AddScoped<RegisterValidator>();
+            return services.AddScoped<RegisterValidator>().AddScoped<LoginValidator>();
         }
     }
 }

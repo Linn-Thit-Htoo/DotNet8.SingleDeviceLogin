@@ -68,8 +68,9 @@ namespace Modules.Auth.Application.Services
                     goto result;
                 }
 
-                string token = "Sample token";
+                string token = "Sample Token";
                 await _context.Tbl_Logins.AddAsync(requestModel.Map(token), cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
 
                 var model = new JwtResponseModel()
                 {
