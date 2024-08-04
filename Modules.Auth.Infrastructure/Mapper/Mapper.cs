@@ -22,5 +22,15 @@ namespace Modules.Auth.Infrastructure.Mapper
                 IsActive = true
             };
         }
+
+        public static Tbl_Login Map(this LoginRequestModel requestModel, string token)
+        {
+            return new Tbl_Login
+            {
+                LoginId = Ulid.NewUlid().ToString(),
+                Email = requestModel.Email,
+                Token = token
+            };
+        }
     }
 }

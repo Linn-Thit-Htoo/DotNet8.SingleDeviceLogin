@@ -15,5 +15,6 @@ namespace Modules.Auth.Infrastructure.Db
         }
 
         public DbSet<Tbl_User> Tbl_Users { get; set; }
+        public DbSet<Tbl_Login> Tbl_Logins { get; set; }
     }
 }

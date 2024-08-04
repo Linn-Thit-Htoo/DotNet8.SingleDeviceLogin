@@ -47,6 +47,48 @@ namespace Modules.Auth.Application.Services
             return responseModel;
         }
 
+        public async Task<Result<JwtResponseModel>> Login(LoginRequestModel requestModel, CancellationToken cancellationToken)
+        {
+            Result<JwtResponseModel> responseModel;
+            try
+            {
+                var oldSession = await _context.Tbl_Logins
+                    .FirstOrDefaultAsync(x => x.Email == requestModel.Email, cancellationToken);
+                if (oldSession is not null)
+                {
+                    _context.Tbl_Logins.Remove(oldSession);
+                }
+
+                var item = await _context.Tbl_Users
+                    .FirstOrDefaultAsync(x => x.Email == requestModel.Email && x.Password == requestModel.Password && x.IsActive
+                    , cancellationToken);
+                if (item is null)
+                {
+                    responseModel = Result<JwtResponseModel>.NotFoundResult("User Not Found");
+                    goto result;
+                }
+
+                string token = "Sample token";
+                await _context.Tbl_Logins.AddAsync(requestModel.Map(token), cancellationToken);
+
+                var model = new JwtResponseModel()
+                {
+                    UserId = item.UserId,
+                    Email = item.Email,
+                    UserName = item.UserName,
+                    Token = token
+                };
+                responseModel = Result<JwtResponseModel>.SuccessResult(model);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<JwtResponseModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
+        }
+
         private async Task<bool> IsEmailDuplicate(string email)
         {
             return await _context.Tbl_Users.AnyAsync(x => x.Email == email && x.IsActive);
