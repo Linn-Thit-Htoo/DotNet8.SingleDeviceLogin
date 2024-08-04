@@ -10,4 +10,10 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Auth.Domain\Modules.Auth.Domain.csproj" />
+    <ProjectReference Include="..\Modules.Auth.Infrastructure\Modules.Auth.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared.Domain\Shared.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
