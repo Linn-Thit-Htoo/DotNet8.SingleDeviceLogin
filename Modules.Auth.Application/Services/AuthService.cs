@@ -2,6 +2,7 @@
 using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
 using Modules.Auth.Infrastructure.Mapper;
+using Shard.Infrastructure;
 using Shared.DTOs.Features;
 using Shared.DTOs.Features.Auth;
 using System;
@@ -15,10 +16,12 @@ namespace Modules.Auth.Application.Services
     public class AuthService : IAuthService
     {
         private readonly AuthDbContext _context;
+        private readonly AesService _aesService;
 
-        public AuthService(AuthDbContext context)
+        public AuthService(AuthDbContext context, AesService aesService)
         {
             _context = context;
+            _aesService = aesService;
         }
 
         public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel, CancellationToken cancellationToken)
@@ -74,9 +77,9 @@ namespace Modules.Auth.Application.Services
 
                 var model = new JwtResponseModel()
                 {
-                    UserId = item.UserId,
-                    Email = item.Email,
-                    UserName = item.UserName,
+                    UserId = _aesService.EncryptString(item.UserId),
+                    Email = _aesService.EncryptString(item.Email),
+                    UserName = _aesService.EncryptString(item.UserName),
                     Token = token
                 };
                 responseModel = Result<JwtResponseModel>.SuccessResult(model);

@@ -8,5 +8,17 @@ namespace Shard.Infrastructure
         {
             return JsonConvert.SerializeObject(obj);
         }
+
+        public static string GetCurrentMyanmarDateTime()
+        {
+            var myanmarTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Myanmar Standard Time");
+            var myanmarDateTime = TimeZoneInfo.ConvertTime(
+                DateTime.Now,
+                TimeZoneInfo.Local,
+                myanmarTimeZone
+            );
+
+            return myanmarDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
     }
 }

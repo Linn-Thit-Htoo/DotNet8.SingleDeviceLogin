@@ -15,5 +15,6 @@ namespace Modules.Auth.Domain.Entities
         public string LoginId { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

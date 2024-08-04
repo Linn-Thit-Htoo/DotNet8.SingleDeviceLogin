@@ -1,4 +1,5 @@
 ﻿using Modules.Auth.Domain.Entities;
+using Shard.Infrastructure;
 using Shared.DTOs.Features.Auth;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace Modules.Auth.Infrastructure.Mapper
             {
                 LoginId = Ulid.NewUlid().ToString(),
                 Email = requestModel.Email,
-                Token = token
+                Token = token,
+                CreatedDate = DevCode.GetCurrentMyanmarDateTime()
             };
         }
     }
