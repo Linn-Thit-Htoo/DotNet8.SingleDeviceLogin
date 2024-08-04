@@ -27,6 +27,32 @@ namespace Modules.Auth.Application.Services
             _jwtAuth = jwtAuth;
         }
 
+        public async Task<Result<UserListResponseModel>> GetUserList(CancellationToken cancellationToken)
+        {
+            Result<UserListResponseModel> responseModel;
+            try
+            {
+                var lst = await _context.Tbl_Users.OrderByDescending(x => x.UserId)
+                    .Where(x => x.IsActive).ToListAsync();
+
+                var userLst = lst.Select(x => new UserModel
+                {
+                    UserId = x.UserId,
+                    UserName = x.UserName,
+                    Email = x.Email,
+                    UserRole = x.UserRole
+                }).ToList();
+
+                responseModel = Result<UserListResponseModel>.SuccessResult(data: new UserListResponseModel(userLst));
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<UserListResponseModel>.FailureResult(ex);
+            }
+
+            return responseModel;
+        }
+
         public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel, CancellationToken cancellationToken)
         {
             Result<RegisterResponseModel> responseModel;
@@ -84,8 +110,8 @@ namespace Modules.Auth.Application.Services
 
                 await _context.Tbl_Logins.AddAsync(requestModel.Map(token), cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
-                
-                responseModel = Result<JwtResponseModel>.SuccessResult(model, token);
+
+                responseModel = Result<JwtResponseModel>.SuccessResult(token, model);
             }
             catch (Exception ex)
             {

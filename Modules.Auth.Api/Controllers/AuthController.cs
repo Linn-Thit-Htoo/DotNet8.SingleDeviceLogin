@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Modules.Auth.Application.Features.Auth.GetUserList;
 using Modules.Auth.Application.Features.Auth.Login;
 using Modules.Auth.Application.Features.Auth.Register;
 using Modules.Auth.Domain.Interfaces;
@@ -19,6 +20,15 @@ namespace Modules.Auth.Api.Controllers
         {
             _authService = authService;
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserList()
+        {
+            var query = new GetUserListQuery();
+            var result = await _mediator.Send(query);
+
+            return Content(result);
         }
 
         [HttpPost("register")]

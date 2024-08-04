@@ -25,24 +25,41 @@ namespace Shared.DTOs.Features
             return new Result<T> { Message = message, StatusCode = statusCode, IsSuccess = true };
         }
 
-        public static Result<T> SuccessResult(T data, string token, string message = "Success.", EnumStatusCode statusCode = EnumStatusCode.Success)
+        public static Result<T> SuccessResult(
+            string token,
+            T data,
+            string message = "Success.",
+            EnumStatusCode statusCode = EnumStatusCode.Success
+        )
         {
-            return new Result<T> { Data = data, Token = token, Message = message, StatusCode = statusCode, IsSuccess = true };
+            return new Result<T>
+            {
+                Message = message,
+                Token = token,
+                Data = data,
+                IsSuccess = true,
+                StatusCode = statusCode
+            };
+        }
+
+        public static Result<T> SuccessResult(T data, string message = "Success.", EnumStatusCode statusCode = EnumStatusCode.Success)
+        {
+            return new Result<T> { Data = data, Message = message, StatusCode = statusCode, IsSuccess = true };
         }
 
         public static Result<T> SaveSuccessResult(string message = "Saving Successful.")
         {
-            return Result<T>.SuccessResult(message);
+            return Result<T>.SuccessResult(message: message);
         }
 
         public static Result<T> UpdateSuccessResult(string message = "Updating Successful.")
         {
-            return Result<T>.SuccessResult(message);
+            return Result<T>.SuccessResult(message: message);
         }
 
         public static Result<T> DeleteSuccessResult(string message = "Deleting Successful.")
         {
-            return Result<T>.SuccessResult(message);
+            return Result<T>.SuccessResult(message: message);
         }
 
         public static Result<T> FailureResult(string message = "Fail.", EnumStatusCode statusCode = EnumStatusCode.BadRequest)
