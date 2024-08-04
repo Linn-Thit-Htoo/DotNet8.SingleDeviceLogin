@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.DTOs.Features.Auth
 {
-    public class AuthResponseModel
+    public class RegisterResponseModel
     {
     }
 }

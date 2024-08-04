@@ -21,26 +21,26 @@ namespace Modules.Auth.Application.Services
             _context = context;
         }
 
-        public async Task<Result<AuthResponseModel>> Register(RegisterRequestModel requestModel)
+        public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel)
         {
-            Result<AuthResponseModel> responseModel;
+            Result<RegisterResponseModel> responseModel;
             try
             {
                 bool emailDuplicate = await IsEmailDuplicate(requestModel.Email);
                 if (emailDuplicate)
                 {
-                    responseModel = Result<AuthResponseModel>.DuplicateResult("User with this email already exists. Please login.");
+                    responseModel = Result<RegisterResponseModel>.DuplicateResult("User with this email already exists. Please login.");
                     goto result;
                 }
 
                 await _context.Tbl_Users.AddAsync(requestModel.Map());
                 await _context.SaveChangesAsync();
 
-                responseModel = Result<AuthResponseModel>.SuccessResult();
+                responseModel = Result<RegisterResponseModel>.SuccessResult();
             }
             catch (Exception ex)
             {
-                responseModel = Result<AuthResponseModel>.FailureResult(ex);
+                responseModel = Result<RegisterResponseModel>.FailureResult(ex);
             }
 
         result:
