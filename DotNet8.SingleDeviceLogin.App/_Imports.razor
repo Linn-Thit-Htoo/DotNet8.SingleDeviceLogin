@@ -1,5 +1,7 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using Blazored.LocalStorage
+@using DotNet8.SingleDeviceLogin.App.Services
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -9,3 +11,6 @@
 @using DotNet8.SingleDeviceLogin.App
 @using DotNet8.SingleDeviceLogin.App.Layout
 @using MudBlazor
+
+@inject HttpClientService HttpClientService
+@inject ILocalStorageService LocalStorage

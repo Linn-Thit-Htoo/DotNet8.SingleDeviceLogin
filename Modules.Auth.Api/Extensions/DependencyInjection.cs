@@ -22,7 +22,8 @@ namespace Modules.Auth.Api.Extensions
                 .AddAuthenticationService(builder)
                 .AddAesService()
                 .AddJwtAuthService()
-                .AddTokenValidationService();
+                .AddTokenValidationService()
+                .AddCorsPolicyService(builder);
         }
 
         private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
@@ -87,5 +88,14 @@ namespace Modules.Auth.Api.Extensions
         {
             return services.AddTransient<TokenValidationService>();
         }
-    }
+
+		private static IServiceCollection AddCorsPolicyService(
+	this IServiceCollection services,
+	WebApplicationBuilder builder
+)
+		{
+			builder.Services.AddCors();
+			return services;
+		}
+	}
 }

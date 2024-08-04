@@ -1,5 +1,7 @@
 ﻿using Shard.Infrastructure;
 using Shared.DTOs.Features;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DotNet8.SingleDeviceLogin.App.Services
 {
@@ -20,7 +22,7 @@ namespace DotNet8.SingleDeviceLogin.App.Services
 			if (requestModel is not null)
 			{
 				string jsonStr = requestModel.SerializeObject();
-				content = new StringContent(jsonStr);
+				content = new StringContent(jsonStr, Encoding.UTF8, Application.Json);
 			}
 
 			switch (httpMethod)
