@@ -21,7 +21,8 @@ namespace Modules.Auth.Api.Extensions
                 .AddValidatorService()
                 .AddAuthenticationService(builder)
                 .AddAesService()
-                .AddJwtAuthService();
+                .AddJwtAuthService()
+                .AddTokenValidationService();
         }
 
         private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
@@ -30,7 +31,7 @@ namespace Modules.Auth.Api.Extensions
             {
                 opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-            });
+            }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             return services;
         }
@@ -74,12 +75,17 @@ namespace Modules.Auth.Api.Extensions
 
         private static IServiceCollection AddAesService(this IServiceCollection services)
         {
-            return services.AddScoped<AesService>();
+            return services.AddTransient<AesService>();
         }
 
         private static IServiceCollection AddJwtAuthService(this IServiceCollection services)
         {
             return services.AddScoped<JWTAuth>();
+        }
+
+        private static IServiceCollection AddTokenValidationService(this IServiceCollection services)
+        {
+            return services.AddTransient<TokenValidationService>();
         }
     }
 }

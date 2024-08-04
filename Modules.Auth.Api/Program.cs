@@ -1,4 +1,5 @@
 using Modules.Auth.Api.Extensions;
+using Modules.Auth.Api.Middlewares;
 using Modules.Auth.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.AddAuthenticationMiddleware();
 
 app.MapControllers();
 

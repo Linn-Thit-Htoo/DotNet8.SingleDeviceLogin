@@ -28,7 +28,7 @@ namespace Modules.Auth.Application.Services.Jwt
                 {
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.Now.ToUnixTimeSeconds().ToString()),
                 new Claim("UserId", jwtResponseModel.UserId),
                 new Claim("UserName", jwtResponseModel.UserName),
                 new Claim("Email", jwtResponseModel.Email),

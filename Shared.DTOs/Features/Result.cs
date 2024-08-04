@@ -11,6 +11,7 @@ namespace Shared.DTOs.Features
 {
     public class Result<T>
     {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public T Data { get; set; }
         public string Message { get; set; }
         public EnumStatusCode StatusCode { get; set; }
