@@ -14,6 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Shard.Infrastructure\Shard.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared.Domain\Shared.Domain.csproj" />
+    <ProjectReference Include="..\Shared.DTOs\Shared.DTOs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
