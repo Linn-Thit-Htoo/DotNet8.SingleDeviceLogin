@@ -7,21 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Modules.Auth.Domain.Interfaces;
+using Modules.Auth.Application.Services;
 
 namespace Modules.Auth.Application.Features.Auth.Register
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<RegisterResponseModel>>
     {
         private readonly IAuthService _authService;
+        private readonly RegisterValidator _registerValidator;
 
-        public RegisterCommandHandler(IAuthService authService)
+        public RegisterCommandHandler(IAuthService authService, RegisterValidator registerValidator)
         {
             _authService = authService;
+            _registerValidator = registerValidator;
         }
 
-        public Task<Result<RegisterResponseModel>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<Result<RegisterResponseModel>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            Result<RegisterResponseModel> responseModel;
+            try
+            {
+                var validationResult = await _registerValidator.ValidateAsync(request.RequestModel);
+                if (!validationResult.IsValid)
+                {
+                    string errors = string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage));
+                    responseModel = Result<RegisterResponseModel>.FailureResult(errors);
+                    goto result;
+                }
+
+                responseModel = await _authService.Register(request.RequestModel, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                responseModel = Result<RegisterResponseModel>.FailureResult(ex);
+            }
+
+        result:
+            return responseModel;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Modules.Auth.Application.Services
             _context = context;
         }
 
-        public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel)
+        public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel, CancellationToken cancellationToken)
         {
             Result<RegisterResponseModel> responseModel;
             try
@@ -34,7 +34,7 @@ namespace Modules.Auth.Application.Services
                 }
 
                 await _context.Tbl_Users.AddAsync(requestModel.Map());
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
 
                 responseModel = Result<RegisterResponseModel>.SuccessResult();
             }

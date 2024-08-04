@@ -10,6 +10,6 @@ namespace Modules.Auth.Domain.Interfaces
 {
     public interface IAuthService
     {
-        Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel);
+        Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel, CancellationToken cancellationToken);
     }
 }
