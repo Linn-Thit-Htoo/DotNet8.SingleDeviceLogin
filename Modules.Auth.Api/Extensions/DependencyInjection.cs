@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Modules.Auth.Application.Services;
+using Modules.Auth.Application.Services.Jwt;
 using Modules.Auth.Application.Services.ValidatorServices;
 using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
@@ -19,7 +20,8 @@ namespace Modules.Auth.Api.Extensions
                 .AddAuthService()
                 .AddValidatorService()
                 .AddAuthenticationService(builder)
-                .AddAesService();
+                .AddAesService()
+                .AddJwtAuthService();
         }
 
         private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
@@ -72,6 +74,11 @@ namespace Modules.Auth.Api.Extensions
         private static IServiceCollection AddAesService(this IServiceCollection services)
         {
             return services.AddScoped<AesService>();
+        }
+
+        private static IServiceCollection AddJwtAuthService(this IServiceCollection services)
+        {
+            return services.AddScoped<JWTAuth>();
         }
     }
 }

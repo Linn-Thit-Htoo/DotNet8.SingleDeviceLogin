@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Auth.Application.Services.Jwt;
 using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
 using Modules.Auth.Infrastructure.Mapper;
@@ -17,11 +18,13 @@ namespace Modules.Auth.Application.Services
     {
         private readonly AuthDbContext _context;
         private readonly AesService _aesService;
+        private readonly JWTAuth _jwtAuth;
 
-        public AuthService(AuthDbContext context, AesService aesService)
+        public AuthService(AuthDbContext context, AesService aesService, JWTAuth jwtAuth)
         {
             _context = context;
             _aesService = aesService;
+            _jwtAuth = jwtAuth;
         }
 
         public async Task<Result<RegisterResponseModel>> Register(RegisterRequestModel requestModel, CancellationToken cancellationToken)
@@ -71,18 +74,18 @@ namespace Modules.Auth.Application.Services
                     goto result;
                 }
 
-                string token = "Sample Token";
-                await _context.Tbl_Logins.AddAsync(requestModel.Map(token), cancellationToken);
-                await _context.SaveChangesAsync(cancellationToken);
-
                 var model = new JwtResponseModel()
                 {
                     UserId = _aesService.EncryptString(item.UserId),
                     Email = _aesService.EncryptString(item.Email),
-                    UserName = _aesService.EncryptString(item.UserName),
-                    Token = token
+                    UserName = _aesService.EncryptString(item.UserName)
                 };
-                responseModel = Result<JwtResponseModel>.SuccessResult(model);
+                var token = _jwtAuth.GetJWTToken(model);
+
+                await _context.Tbl_Logins.AddAsync(requestModel.Map(token), cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+                
+                responseModel = Result<JwtResponseModel>.SuccessResult(model, token);
             }
             catch (Exception ex)
             {

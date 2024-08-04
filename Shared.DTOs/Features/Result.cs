@@ -1,8 +1,10 @@
-﻿using Shared.Domain.Enums;
+﻿using Newtonsoft.Json;
+using Shared.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Shared.DTOs.Features
@@ -15,14 +17,17 @@ namespace Shared.DTOs.Features
         public bool IsSuccess { get; set; }
         public bool IsError => !IsSuccess;
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string Token { get; set; }
+
         public static Result<T> SuccessResult(string message = "Success.", EnumStatusCode statusCode = EnumStatusCode.Success)
         {
             return new Result<T> { Message = message, StatusCode = statusCode, IsSuccess = true };
         }
 
-        public static Result<T> SuccessResult(T data, string message = "Success.", EnumStatusCode statusCode = EnumStatusCode.Success)
+        public static Result<T> SuccessResult(T data, string token, string message = "Success.", EnumStatusCode statusCode = EnumStatusCode.Success)
         {
-            return new Result<T> { Data = data, Message = message, StatusCode = statusCode, IsSuccess = true };
+            return new Result<T> { Data = data, Token = token, Message = message, StatusCode = statusCode, IsSuccess = true };
         }
 
         public static Result<T> SaveSuccessResult(string message = "Saving Successful.")
