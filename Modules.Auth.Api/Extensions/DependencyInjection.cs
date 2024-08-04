@@ -44,6 +44,7 @@ namespace Modules.Auth.Api.Extensions
         {
             return services.AddScoped<RegisterValidator>().AddScoped<LoginValidator>();
         }
+
         private static IServiceCollection AddAuthenticationService(
     this IServiceCollection services,
     WebApplicationBuilder builder
