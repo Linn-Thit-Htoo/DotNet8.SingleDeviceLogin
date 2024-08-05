@@ -1,46 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using Modules.Auth.Application.Services.ValidatorServices;
+﻿namespace Modules.Auth.Application.Features.Auth.Login;
 
-namespace Modules.Auth.Application.Features.Auth.Login
+public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<JwtResponseModel>>
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<JwtResponseModel>>
+    private readonly IAuthService _authService;
+    private readonly LoginValidator _loginValidator;
+
+    public LoginQueryHandler(IAuthService authService, LoginValidator loginValidator)
     {
-        private readonly IAuthService _authService;
-        private readonly LoginValidator _loginValidator;
+        _authService = authService;
+        _loginValidator = loginValidator;
+    }
 
-        public LoginQueryHandler(IAuthService authService, LoginValidator loginValidator)
+    public async Task<Result<JwtResponseModel>> Handle(
+        LoginQuery request,
+        CancellationToken cancellationToken
+    )
+    {
+        Result<JwtResponseModel> responseModel;
+        try
         {
-            _authService = authService;
-            _loginValidator = loginValidator;
+            var validationResult = await _loginValidator.ValidateAsync(request.RequestModel);
+            if (!validationResult.IsValid)
+            {
+                string errors = string.Join(
+                    " ",
+                    validationResult.Errors.Select(x => x.ErrorMessage)
+                );
+                responseModel = Result<JwtResponseModel>.FailureResult(errors);
+                goto result;
+            }
+
+            responseModel = await _authService.Login(request.RequestModel, cancellationToken);
         }
-
-        public async Task<Result<JwtResponseModel>> Handle(LoginQuery request, CancellationToken cancellationToken)
+        catch (Exception ex)
         {
-            Result<JwtResponseModel> responseModel;
-            try
-            {
-                var validationResult = await _loginValidator.ValidateAsync(request.RequestModel);
-                if (!validationResult.IsValid)
-                {
-                    string errors = string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage));
-                    responseModel = Result<JwtResponseModel>.FailureResult(errors);
-                    goto result;
-                }
-
-                responseModel = await _authService.Login(request.RequestModel, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                responseModel = Result<JwtResponseModel>.FailureResult(ex);
-            }
+            responseModel = Result<JwtResponseModel>.FailureResult(ex);
+        }
 
         result:
-            return responseModel;
-        }
+        return responseModel;
     }
 }
