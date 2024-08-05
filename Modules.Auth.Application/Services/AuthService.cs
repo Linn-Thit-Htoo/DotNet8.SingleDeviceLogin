@@ -26,12 +26,12 @@ public class AuthService : IAuthService
                 .ToListAsync();
 
             var userLst = lst.Select(x => new UserModel
-                {
-                    UserId = x.UserId,
-                    UserName = x.UserName,
-                    Email = x.Email,
-                    UserRole = x.UserRole
-                })
+            {
+                UserId = x.UserId,
+                UserName = x.UserName,
+                Email = x.Email,
+                UserRole = x.UserRole
+            })
                 .ToList();
 
             responseModel = Result<UserListResponseModel>.SuccessResult(
@@ -73,7 +73,7 @@ public class AuthService : IAuthService
             responseModel = Result<RegisterResponseModel>.FailureResult(ex);
         }
 
-        result:
+    result:
         return responseModel;
     }
 
@@ -125,7 +125,7 @@ public class AuthService : IAuthService
             responseModel = Result<JwtResponseModel>.FailureResult(ex);
         }
 
-        result:
+    result:
         return responseModel;
     }
 
