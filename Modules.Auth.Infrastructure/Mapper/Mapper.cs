@@ -1,5 +1,4 @@
-﻿using Modules.Auth.Domain.Entities;
-using Shard.Infrastructure;
+﻿using Shard.Infrastructure;
 using Shared.DTOs.Features.Auth;
 using System;
 using System.Collections.Generic;
