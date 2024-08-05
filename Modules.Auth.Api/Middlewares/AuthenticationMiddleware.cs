@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.Auth.Domain.Enums;
 using Modules.Auth.Infrastructure.Db;
-using Shard.Infrastructure;
 using Shared.Domain.Enums;
 using Shared.Domain.Resources;
 using Shared.DTOs.Features;

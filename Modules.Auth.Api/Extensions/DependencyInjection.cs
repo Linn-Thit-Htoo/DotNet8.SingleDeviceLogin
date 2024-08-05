@@ -6,7 +6,6 @@ using Modules.Auth.Application.Services;
 using Modules.Auth.Application.Services.Jwt;
 using Modules.Auth.Application.Services.ValidatorServices;
 using Modules.Auth.Infrastructure.Db;
-using Shard.Infrastructure;
 using System.Text;
 
 namespace Modules.Auth.Api.Extensions

@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using Shard.Infrastructure;
+﻿namespace Modules.Auth.Api.Controllers;
 
-namespace Modules.Auth.Api.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class BaseController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BaseController : ControllerBase
+    protected IActionResult Content(object obj)
     {
-        protected IActionResult Content(object obj)
-        {
-            return Content(obj.SerializeObject(), "application/json");
-        }
+        return Content(obj.SerializeObject(), "application/json");
     }
 }
