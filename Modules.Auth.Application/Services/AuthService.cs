@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.Auth.Application.Services.Jwt;
-using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
 using Modules.Auth.Infrastructure.Mapper;
 using Shard.Infrastructure;
-using Shared.DTOs.Features;
-using Shared.DTOs.Features.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;

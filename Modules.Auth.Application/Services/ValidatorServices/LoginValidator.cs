@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Shared.DTOs.Features.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
