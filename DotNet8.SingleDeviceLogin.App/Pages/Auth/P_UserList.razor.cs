@@ -1,7 +1,4 @@
-﻿using MudBlazor;
-using Shared.Domain.Enums;
-
-namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
+﻿namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
 {
     public partial class P_UserList
     {
