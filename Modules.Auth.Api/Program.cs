@@ -1,5 +1,4 @@
 using Modules.Auth.Api.Extensions;
-using Modules.Auth.Api.Middlewares;
 using Modules.Auth.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

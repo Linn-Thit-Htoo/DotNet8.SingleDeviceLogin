@@ -2,6 +2,7 @@
 
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
+global using Modules.Auth.Api.Middlewares;
 global using Modules.Auth.Application.Features.Auth.GetUserList;
 global using Modules.Auth.Application.Features.Auth.Login;
 global using Modules.Auth.Application.Features.Auth.Register;

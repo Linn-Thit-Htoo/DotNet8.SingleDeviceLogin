@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Modules.Auth.Api.Middlewares;
+﻿namespace Modules.Auth.Api.Extensions;
 
-namespace Modules.Auth.Api.Extensions
+public static class AuthenticationMiddlewareExtension
 {
-    public static class AuthenticationMiddlewareExtension
+    public static IApplicationBuilder AddAuthenticationMiddleware(this WebApplication app)
     {
-        public static IApplicationBuilder AddAuthenticationMiddleware(this WebApplication app)
-        {
-            return app.UseMiddleware<AuthenticationMiddleware>();
-        }
+        return app.UseMiddleware<AuthenticationMiddleware>();
     }
 }
