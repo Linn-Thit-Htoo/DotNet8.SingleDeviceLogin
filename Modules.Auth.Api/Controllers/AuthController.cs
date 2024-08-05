@@ -1,13 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Modules.Auth.Application.Features.Auth.GetUserList;
-using Modules.Auth.Application.Features.Auth.Login;
-using Modules.Auth.Application.Features.Auth.Register;
-using Modules.Auth.Domain.Interfaces;
-using Shared.DTOs.Features.Auth;
-
-namespace Modules.Auth.Api.Controllers
+﻿namespace Modules.Auth.Api.Controllers
 {
     [Route("api/account")]
     [ApiController]

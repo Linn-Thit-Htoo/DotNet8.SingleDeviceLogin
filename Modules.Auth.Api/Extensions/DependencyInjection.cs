@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using Modules.Auth.Application.Services;
 using Modules.Auth.Application.Services.Jwt;
 using Modules.Auth.Application.Services.ValidatorServices;
-using Modules.Auth.Domain.Interfaces;
 using Modules.Auth.Infrastructure.Db;
 using Shard.Infrastructure;
 using System.Text;
