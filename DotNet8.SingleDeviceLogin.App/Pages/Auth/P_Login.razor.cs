@@ -10,7 +10,7 @@ namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
 
 		private async Task Login()
 		{
-			var responseModel = await HttpClientService.ExecuteAsync<Result<JwtResponseModel>>("/api/account/login", EnumHttpMethod.POST, RequestModel);
+			var responseModel = await HttpClientService.ExecuteAsync<Result<JwtResponseModel>>(Endpoints.Login, EnumHttpMethod.POST, RequestModel);
 
 			if (responseModel.IsSuccess)
 			{

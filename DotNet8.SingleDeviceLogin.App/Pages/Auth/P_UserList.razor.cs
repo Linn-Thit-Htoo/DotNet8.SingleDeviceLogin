@@ -1,5 +1,6 @@
 ﻿using DotNet8.SingleDeviceLogin.App.Services;
 using MudBlazor;
+using Shared.Domain.Enums;
 using Shared.DTOs.Features;
 using Shared.DTOs.Features.Auth;
 
@@ -16,10 +17,15 @@ namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
 
         private async Task List()
         {
-            ResponseModel = await HttpClientService.ExecuteAsync<Result<UserListResponseModel>>("/api/account", EnumHttpMethod.GET);
+            ResponseModel = await HttpClientService.ExecuteAsync<Result<UserListResponseModel>>(Endpoints.UserList, EnumHttpMethod.GET);
             if (ResponseModel.IsError)
             {
                 Snackbar.Add(ResponseModel.Message, Severity.Error);
+            }
+
+            if (ResponseModel.StatusCode == EnumStatusCode.UnAuthorized)
+            {
+                Navigation.NavigateTo("/");
             }
         }
     }
