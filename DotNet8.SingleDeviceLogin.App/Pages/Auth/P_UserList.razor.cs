@@ -1,8 +1,5 @@
-﻿using DotNet8.SingleDeviceLogin.App.Services;
-using MudBlazor;
+﻿using MudBlazor;
 using Shared.Domain.Enums;
-using Shared.DTOs.Features;
-using Shared.DTOs.Features.Auth;
 
 namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
 {

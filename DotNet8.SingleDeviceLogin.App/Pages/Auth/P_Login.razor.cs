@@ -1,22 +1,17 @@
-﻿using DotNet8.SingleDeviceLogin.App.Services;
-using Shared.DTOs.Features;
-using Shared.DTOs.Features.Auth;
+﻿namespace DotNet8.SingleDeviceLogin.App.Pages.Auth;
 
-namespace DotNet8.SingleDeviceLogin.App.Pages.Auth
+public partial class P_Login
 {
-	public partial class P_Login
+	private LoginRequestModel RequestModel = new();
+
+	private async Task Login()
 	{
-		private LoginRequestModel RequestModel = new();
+		var responseModel = await HttpClientService.ExecuteAsync<Result<JwtResponseModel>>(Endpoints.Login, EnumHttpMethod.POST, RequestModel);
 
-		private async Task Login()
+		if (responseModel.IsSuccess)
 		{
-			var responseModel = await HttpClientService.ExecuteAsync<Result<JwtResponseModel>>(Endpoints.Login, EnumHttpMethod.POST, RequestModel);
-
-			if (responseModel.IsSuccess)
-			{
-				await LocalStorage.SetItemAsStringAsync("token", responseModel.Token);
-                Navigation.NavigateTo("/users");
-            }
-        }
+			await LocalStorage.SetItemAsStringAsync("token", responseModel.Token);
+			Navigation.NavigateTo("/users");
+		}
 	}
 }
