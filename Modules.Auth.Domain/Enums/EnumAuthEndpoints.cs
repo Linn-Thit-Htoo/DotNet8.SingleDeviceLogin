@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Modules.Auth.Domain.Enums;
 
-namespace Modules.Auth.Domain.Enums
+public enum EnumAuthEndpoints
 {
-    public enum EnumAuthEndpoints
-    {
-        [Description("/api/account/login")]
-        Login,
+    [Description("/api/account/login")]
+    Login,
 
-        [Description("/api/account/register")]
-        Register
-    }
+    [Description("/api/account/register")]
+    Register
 }
